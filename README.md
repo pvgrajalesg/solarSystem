@@ -28,7 +28,7 @@ consultado.
 Cloudfoudry) y enviar la URL para consulta:
 Ej: GET → http://….../clima?dia=566 → Respuesta: {“dia”:566, “clima”:”lluvia”}
 
-## solución
+## Solución
 
 1. Se halla la posicón de cada planeta según el día
 
@@ -70,6 +70,10 @@ Framework: Spring Boot.
 Db: H2.
 
 ## Como usar
+
+Api para obtener el número de días: https://solasystem.ue.r.appspot.com/api/climateByDay?day=<number_of_the_day>
+
+Para obtener las prediciones de 10 años: https://solasystem.ue.r.appspot.com/api/generatePronostic
 
 
 
