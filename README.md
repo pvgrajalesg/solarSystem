@@ -1,11 +1,11 @@
-# solarSystem
+# Solar System
 En una galaxia lejana, existen tres civilizaciones. Vulcanos, Ferengis y Betasoides. Cada civilización vive en paz en su respectivo planeta. 
 
 Dominan la predicción del clima mediante un complejo sistema informático.
 
 A continuación el diagrama del sistema solar.
 
-![Aquí la descripción de la imagen por si no carga](https://github.com/pvgrajalesg/solarSystem/imagenes/imagen1.PNG)
+![Diagrama del sistema solar](https://github.com/pvgrajalesg/solarSystem/blob/master/imagenes/imagen1.PNG)
 
 Premisas:
 
@@ -16,15 +16,15 @@ Premisas:
 
 Cuando los tres planetas están alineados entre sí y a su vez alineados con respecto al sol, el sistema solar experimenta un período de sequía.
 
-![Aquí la descripción de la imagen por si no carga](https://github.com/pvgrajalesg/solarSystem/imagenes/imagen2.PNG)
+![Diagrama del sistema solar con planetas alineados con el sol](https://github.com/pvgrajalesg/solarSystem/blob/master/imagenes/imagen2.PNG)
 
 Cuando los tres planetas no están alineados, forman entre sí un triángulo. Es sabido que en el momento en el que el sol se encuentra dentro del triángulo, el sistema solar experimenta un período de lluvia, teniendo éste, un pico de intensidad cuando el perímetro del triángulo está en su máximo.
 
-![Aquí la descripción de la imagen por si no carga](https://github.com/pvgrajalesg/solarSystem/imagenes/imagen3.PNG)
+![Diagrama del sistema solar con planetas haciendo un triangulo](https://github.com/pvgrajalesg/solarSystem/blob/master/imagenes/imagen3.PNG)
 
 Las condiciones óptimas de presión y temperatura se dan cuando los tres planetas están alineados entre sí pero no están alineados con el sol.
 
-![Aquí la descripción de la imagen por si no carga](https://github.com/pvgrajalesg/solarSystem/imagenes/imagen4.PNG)
+![Diagrama del sistema solar con planetas alineados sin el sol](https://github.com/pvgrajalesg/solarSystem/blob/master/imagenes/imagen4.PNG)
 
 Realizar un programa informático para poder predecir en los próximos 10 años:
 1. ¿Cuántos períodos de sequía habrá?
@@ -47,7 +47,7 @@ Ej: GET → http://….../clima?dia=566 → Respuesta: {“dia”:566, “clima�
 
 2. Para hallar cuando los planetas estan alineados entre si y con el sol se utiliza la siguiente fórmula:
 
-    ![Aquí la descripción de la imagen por si no carga](https://github.com/pvgrajalesg/solarSystem/imagenes/imagen5.PNG)
+    ![Formula utilizada para saber si dos planetas estan alineados](https://github.com/pvgrajalesg/solarSystem/blob/master/imagenes/imagen5.PNG)
 
 3. Para hallar si los planetas formas un triangulo y el sol se encuentra dentro de este triangulo se utiliza la siguiente algoritmo (Fuente: http://www.dma.fi.upm.es/personal/mabellanas/tfcs/kirkpatrick/Aplicacion/algoritmos.htm#puntoInteriorAlgoritmo):
 
