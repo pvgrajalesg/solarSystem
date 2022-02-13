@@ -73,4 +73,13 @@ public class Calculation {
 
         return triangleOrientation;
     }
+
+    public static double findPerimeter(List<Point> positionsPlanets) {
+
+        double sideTriangle1 = positionsPlanets.get(0).distance(positionsPlanets.get(1));
+        double sideTriangle2 = positionsPlanets.get(0).distance(positionsPlanets.get(2));
+        double sideTriangle3 = positionsPlanets.get(1).distance(positionsPlanets.get(2));
+
+        return sideTriangle1 + sideTriangle2 + sideTriangle3;
+    }
 }

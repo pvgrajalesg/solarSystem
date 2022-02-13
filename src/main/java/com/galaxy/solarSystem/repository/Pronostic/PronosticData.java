@@ -25,4 +25,6 @@ public class PronosticData {
     private int day;
 
     private String climate;
+
+    private double perimeter;
 }

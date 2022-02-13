@@ -19,14 +19,4 @@ public class SolarSystemApplication {
 		SpringApplication.run(SolarSystemApplication.class, args);
 	}
 
-	@Bean
-	public PronosticUseCase createPronosticUseCase(PronosticRepository pronosticRepository, PlanetRepository planetRepository) {
-		return new PronosticUseCaseImp(pronosticRepository, planetRepository);
-	}
-
-	@Bean
-	public PlanetUseCase createPlanetUseCase(PlanetRepository repository) {
-		return new PlanetUseCaseImp(repository);
-	}
-
 }

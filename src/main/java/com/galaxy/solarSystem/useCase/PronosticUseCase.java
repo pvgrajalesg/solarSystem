@@ -9,4 +9,5 @@ public interface PronosticUseCase {
 
     Pronostic climateByDay(int day);
     List<Period> generatePeriods();
+    List<Pronostic> getPronostics(int daysNumber);
 }

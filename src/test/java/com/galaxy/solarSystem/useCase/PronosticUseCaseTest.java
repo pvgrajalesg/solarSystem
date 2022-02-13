@@ -48,23 +48,17 @@ public class PronosticUseCaseTest {
     @Test
     public void generatedPronosticCorrectRequestTest(){
 
-        String clockwise = "clockwise";
-        String counterclockwise = "counterclockwise";
+        int daySearch = 1;
 
-        Planet ferengi = new Planet(PlanetEnum.FERENGI, clockwise,500, 1);
-        Planet betasoide = new Planet(PlanetEnum.BETASOIDE, clockwise,2000, 3);
-        Planet vulcano = new Planet(PlanetEnum.VULCANO, counterclockwise, 1000, 5);
+        Pronostic pronosticSearch = Pronostic.builder().day(daySearch).climate(ClimateEnum.OPTIMUN.toString()).build();
+        List<Pronostic> pronostics = new ArrayList<>();
+        pronostics.add(pronosticSearch);
 
-        List<Planet> planets = new ArrayList<>();
-        planets.add(ferengi);
-        planets.add(betasoide);
-        planets.add(vulcano);
-
-        Mockito.when(planetRepository.getPlanets()).thenReturn(planets);
+        Mockito.when(pronosticRepository.getAllPronostic()).thenReturn(pronostics);
 
         List<Period> periods = pronosticUseCase.generatePeriods();
 
         Assert.assertNotNull(periods);
-        Assert.assertTrue(periods.size()>1);
+        Assert.assertTrue(periods.size()>=1);
     }
 }

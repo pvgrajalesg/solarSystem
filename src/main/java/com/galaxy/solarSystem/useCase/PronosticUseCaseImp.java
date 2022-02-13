@@ -11,6 +11,7 @@ import com.galaxy.solarSystem.useCase.util.ClimateEnum;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -19,41 +20,52 @@ public class PronosticUseCaseImp implements PronosticUseCase {
     private final PronosticRepository pronosticRepository;
     private final PlanetRepository planetRepository;
 
-    private static final int DAYS_YEARS = 360;
-    private static final int YEARS_PRONOSTIC = 10;
-
     @Override
     public Pronostic climateByDay(int day) {
-        Pronostic pronosticByDay = pronosticRepository.climateByDay(day);
-        return pronosticByDay;
+        try {
+            Pronostic pronosticByDay = pronosticRepository.climateByDay(day);
+            return pronosticByDay;
+        }catch (Exception e){
+            throw new RuntimeException("No se pudieron obtener los datos de la BD");
+        }
     }
 
     @Override
     public List<Period> generatePeriods() {
-        int daysNumber = YEARS_PRONOSTIC * DAYS_YEARS;
+
         List<Pronostic> pronostics = new ArrayList<>();
-
-        getPronostics(daysNumber);
-
-        pronostics = pronosticRepository.getAllPronostic();
-
         List<Period> periods = new ArrayList<>();
-        long quantityPeriodsDrought = pronostics.stream().filter(pronostic -> ClimateEnum.DROUGHT.toString().equals(pronostic.getClimate())).count();
-        Period period = new Period(ClimateEnum.DROUGHT, quantityPeriodsDrought);
-        periods.add(period);
 
-        long quantityPeriodsOptimun = pronostics.stream().filter(pronostic -> ClimateEnum.OPTIMUN.toString().equals(pronostic.getClimate())).count();
-        period = new Period(ClimateEnum.OPTIMUN, quantityPeriodsOptimun);
-        periods.add(period);
+        try {
+            pronostics = pronosticRepository.getAllPronostic();
+        }catch (Exception e){
+            throw new RuntimeException("No se pudieron obtener los datos de la BD");
+        }
 
-        long quantityPeriodsRainy = pronostics.stream().filter(pronostic -> ClimateEnum.RAINY.toString().equals(pronostic.getClimate())).count();
-        period = new Period(ClimateEnum.RAINY, quantityPeriodsRainy);
-        periods.add(period);
+        if(!pronostics.isEmpty()) {
+
+            long quantityPeriodsDrought = pronostics.stream().filter(pronostic -> ClimateEnum.DROUGHT.toString().equals(pronostic.getClimate())).count();
+            Period period = new Period(ClimateEnum.DROUGHT, quantityPeriodsDrought);
+            periods.add(period);
+
+            long quantityPeriodsOptimun = pronostics.stream().filter(pronostic -> ClimateEnum.OPTIMUN.toString().equals(pronostic.getClimate())).count();
+            period = new Period(ClimateEnum.OPTIMUN, quantityPeriodsOptimun);
+            periods.add(period);
+
+            long quantityPeriodsRainy = pronostics.stream().filter(pronostic -> ClimateEnum.RAINY.toString().equals(pronostic.getClimate())).count();
+            period = new Period(ClimateEnum.RAINY, quantityPeriodsRainy);
+            periods.add(period);
+
+            Pronostic pronosticMaxRainy = pronostics.stream().max(Comparator.comparingDouble(Pronostic::getPerimeter)).get();
+            period = new Period(ClimateEnum.MAXRAINY, 1, pronosticMaxRainy.getDay());
+            periods.add(period);
+        }
 
         return periods;
     }
 
-    private List<Pronostic> getPronostics(int daysNumber) {
+    @Override
+    public List<Pronostic> getPronostics(int daysNumber) {
         List<Pronostic> pronostics = new ArrayList<>();
         for(int i=1; i<daysNumber; i++) {
             Pronostic pronostic = findPronosticByDay(i);
@@ -85,10 +97,13 @@ public class PronosticUseCaseImp implements PronosticUseCase {
         }else if(isAlignedWithoutSun){
             pronostic = new Pronostic(day, ClimateEnum.OPTIMUN);
         }else if(isTriangle){
-            pronostic = new Pronostic(day, ClimateEnum.RAINY);
+            double perimeter = Calculation.findPerimeter(positionsPlanets);
+            pronostic = new Pronostic(day, ClimateEnum.RAINY, perimeter);
         }
 
         return pronosticRepository.save(pronostic);
     }
+
+
 
 }

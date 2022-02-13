@@ -4,5 +4,6 @@ public enum ClimateEnum {
     DROUGHT,
     OPTIMUN,
     RAINY,
+    MAXRAINY,
     UNKNOWN
 }

@@ -1,9 +1,7 @@
 package com.galaxy.solarSystem.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.galaxy.solarSystem.controller.dto.PronosticDto;
 import com.galaxy.solarSystem.model.Period;
-import com.galaxy.solarSystem.model.Planet;
 import com.galaxy.solarSystem.model.Pronostic;
 import com.galaxy.solarSystem.useCase.PlanetUseCase;
 import com.galaxy.solarSystem.useCase.PronosticUseCase;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,26 +20,25 @@ public class ClimateController {
     @Autowired
     private PronosticUseCase pronosticUseCase;
 
-    @Autowired
-    private PlanetUseCase planetUseCase;
-
-    @Autowired
-    private ObjectMapper mapper;
-
+    /**
+     * EJ: http://localhost:PUERTO/api/generatePronostic/climateByDay?day=4
+     * @param day dia del que se quiere consultar el clima
+     * @return el clima del dia consultado
+     */
     @GetMapping("/climateByDay")
-    public PronosticDto climatePronosticByDay(@RequestParam int day){
+    public Pronostic climatePronosticByDay(@RequestParam int day){
         Pronostic pronostic = pronosticUseCase.climateByDay(day);
-        return mapper.convertValue(pronostic, PronosticDto.class);
+        return pronostic;
     }
 
+    /**
+     * EJ: http://localhost:PUERTO/api/generatePronostic
+     * @return cuantas veces se repetirá cada tipo de clima en 10 anios.
+     */
     @GetMapping("/generatePronostic")
     public List<Period> generatePronostic(){
 
-        List<Period> resultPeriodos = new ArrayList<>();
-        List<Planet> resultInsertPlanets = planetUseCase.savePlanets();
-        if(!resultInsertPlanets.isEmpty()){
-            resultPeriodos = pronosticUseCase.generatePeriods();
-        }
+        List<Period> resultPeriodos = pronosticUseCase.generatePeriods();
 
         return resultPeriodos;
     }

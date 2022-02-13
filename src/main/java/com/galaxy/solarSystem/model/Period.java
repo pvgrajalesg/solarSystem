@@ -13,6 +13,11 @@ import lombok.NoArgsConstructor;
 public class Period {
 
     private ClimateEnum typeClimate;
-    private long Quantity;
+    private long quantity;
+    private int day;
 
+    public Period(ClimateEnum typeClimate, long quantity) {
+        this.typeClimate = typeClimate;
+        this.quantity = quantity;
+    }
 }
