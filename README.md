@@ -84,7 +84,7 @@ Db: H2.
 
 ## Como usar
 
-Api para obtener el número de días: https://solasystem.ue.r.appspot.com/api/climateByDay?day=<number_of_the_day>
+Api para obtener el pronóstico según el día: https://solasystem.ue.r.appspot.com/api/climateByDay?day=<number_of_the_day>
 
 Para obtener las prediciones de 10 años: https://solasystem.ue.r.appspot.com/api/generatePronostic
 
